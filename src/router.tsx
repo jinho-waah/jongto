@@ -3,12 +3,13 @@ import MainPage from "./pages/main/MainPage";
 import Ticker from "./pages/ticker/Ticker";
 import pageRoutes from "./apiRoutes";
 import DarkMode from "./components/darkmode/DarkMode";
+import Layout from "./pages/common/layout/Layout";
 
 const CommonLayout = () => (
-  <div className="min-h-screen relative">
+  <Layout>
     <Outlet />
     <DarkMode />
-  </div>
+  </Layout>
 );
 
 const router = createBrowserRouter([

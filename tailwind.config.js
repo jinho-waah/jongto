@@ -3,7 +3,13 @@ module.exports = {
   darkMode: 'selector',
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dark: {
+          DEFAULT: "#181a20", 
+        },
+      },
+    },
   },
   plugins: [],
 }
