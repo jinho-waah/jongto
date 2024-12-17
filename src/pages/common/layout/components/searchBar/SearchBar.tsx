@@ -10,7 +10,7 @@ export default function SearchBar({ placeholder }: { placeholder?: string }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Search Query:", searchQuery); // 검색 로직 추가 가능
+    console.log("Search Query:", searchQuery);
   };
 
   return (
