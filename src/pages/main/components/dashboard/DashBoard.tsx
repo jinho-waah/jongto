@@ -1,12 +1,37 @@
 import { useState } from "react";
-import stockData from "./dumbydata";
 import { Box } from "@/pages/common/layout/components/box/Box";
-import { TabButton } from "./components/tab-button/TabButton";
-import { StockTable } from "./components/stock-table/StockTable";
-import { TAB_NAME } from "@/constants";
+import { TabButton } from "./tab-button/TabButton";
+import { StockTable } from "./stock-table/StockTable";
+import {
+  GAIN_TOP_10,
+  LOSS_TOP_10,
+  MARKET_CAP_TOP_10,
+  TAB_NAME,
+  VOLUME_TOP_10,
+} from "@/constants";
+import { useVolumeRank } from "./hooks/useVolumeRank";
+import { useGainRateRank } from "./hooks/useGainRateRank";
+import { useLossRateRank } from "./hooks/useLossRateRank";
+import { useMarketCapRank } from "./hooks/useMarketCapRank";
 
 export default function DashBoard() {
   const [activeTab, setActiveTab] = useState("gainTop10");
+
+  const { data: gainRateRank, isLoading: rateRankLoading } =
+    useGainRateRank(10);
+  const { data: lossRateRank, isLoading: lossRankLoading } =
+    useLossRateRank(10);
+  const { data: volumeRank, isLoading: volumeRankLoading } = useVolumeRank(10);
+  const { data: marketCapRank, isLoading: marketCapRankLoading } =
+    useMarketCapRank(10);
+
+  if (
+    rateRankLoading ||
+    lossRankLoading ||
+    volumeRankLoading ||
+    marketCapRankLoading
+  )
+    return <>loading</>;
 
   return (
     <Box title="주식 시장 TOP 10">
@@ -24,30 +49,16 @@ export default function DashBoard() {
 
       <div className="p-4 bg-white dark:bg-dark text-gray-900 dark:text-gray-100">
         {activeTab === "gainTop10" && (
-          <StockTable
-            data={stockData.gainTop10}
-            fields={["code", "name", "change", "price"]}
-            highlightField="change"
-          />
+          <StockTable data={gainRateRank.data} fields={GAIN_TOP_10} />
         )}
         {activeTab === "lossTop10" && (
-          <StockTable
-            data={stockData.lossTop10}
-            fields={["code", "name", "change", "price"]}
-            highlightField="change"
-          />
+          <StockTable data={lossRateRank.data} fields={LOSS_TOP_10} />
         )}
         {activeTab === "volumeTop10" && (
-          <StockTable
-            data={stockData.volumeTop10}
-            fields={["code", "name", "volume", "price"]}
-          />
+          <StockTable data={volumeRank.data} fields={VOLUME_TOP_10} />
         )}
         {activeTab === "marketCapTop10" && (
-          <StockTable
-            data={stockData.marketCapTop10}
-            fields={["code", "name", "marketCap", "price"]}
-          />
+          <StockTable data={marketCapRank.data} fields={MARKET_CAP_TOP_10} />
         )}
       </div>
     </Box>
