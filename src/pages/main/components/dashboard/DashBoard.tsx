@@ -2,36 +2,29 @@ import { useState } from "react";
 import { Box } from "@/pages/common/layout/components/box/Box";
 import { TabButton } from "./tab-button/TabButton";
 import { StockTable } from "./stock-table/StockTable";
+import { TAB_NAME } from "@/constants";
+import { useVolumeRank } from "../../../../hooks/useVolumeRank";
+import { useGainRateRank } from "../../../../hooks/useGainRateRank";
+import { useLossRateRank } from "../../../../hooks/useLossRateRank";
+import { useMarketCapRank } from "../../../../hooks/useMarketCapRank";
 import {
   GAIN_TOP_10,
   LOSS_TOP_10,
   MARKET_CAP_TOP_10,
-  TAB_NAME,
   VOLUME_TOP_10,
-} from "@/constants";
-import { useVolumeRank } from "./hooks/useVolumeRank";
-import { useGainRateRank } from "./hooks/useGainRateRank";
-import { useLossRateRank } from "./hooks/useLossRateRank";
-import { useMarketCapRank } from "./hooks/useMarketCapRank";
+} from "./types";
 
 export default function DashBoard() {
   const [activeTab, setActiveTab] = useState("gainTop10");
 
-  const { data: gainRateRank, isLoading: rateRankLoading } =
-    useGainRateRank(10);
-  const { data: lossRateRank, isLoading: lossRankLoading } =
-    useLossRateRank(10);
-  const { data: volumeRank, isLoading: volumeRankLoading } = useVolumeRank(10);
-  const { data: marketCapRank, isLoading: marketCapRankLoading } =
-    useMarketCapRank(10);
+  const { data: gainRateRank } = useGainRateRank(10);
+  const { data: lossRateRank } = useLossRateRank(10);
+  const { data: volumeRank } = useVolumeRank(10);
+  const { data: marketCapRank } = useMarketCapRank(10);
 
-  if (
-    rateRankLoading ||
-    lossRankLoading ||
-    volumeRankLoading ||
-    marketCapRankLoading
-  )
-    return <>loading</>;
+  if (!gainRateRank || !lossRateRank || !volumeRank || !marketCapRank) {
+    return <div>Error: 데이터를 불러올 수 없습니다.</div>;
+  }
 
   return (
     <Box title="주식 시장 TOP 10">
