@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "@/components/darkmode/ui/button/Button";
+import { Button } from "@/components/button/Button";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);

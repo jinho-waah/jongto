@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@/pages/common/layout/components/box/Box";
+import { Box } from "@/components/box/Box";
 import { TabButton } from "./tab-button/TabButton";
 import { StockTable } from "./stock-table/StockTable";
 import { TAB_NAME } from "@/constants";

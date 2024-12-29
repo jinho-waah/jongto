@@ -1,4 +1,4 @@
-import SearchBar from "@/pages/common/layout/components/searchBar/SearchBar";
+import SearchBar from "@/pages/common/searchBar/SearchBar";
 import DashBoard from "./components/dashboard/DashBoard";
 
 export default function MainPage() {
