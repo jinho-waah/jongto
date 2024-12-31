@@ -4,18 +4,22 @@ interface InputProps {
   type: string;
   placeholder?: string;
   value?: string;
+  name?: string; // name 속성 추가
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   disabled?: boolean; // 비활성화 여부
+  readOnly?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
   type,
   placeholder,
   value,
+  name, // name 속성 추가
   onChange,
   className = "",
-  disabled = false, // 기본값: 활성화 상태
+  disabled = false,
+  readOnly = false,
 }) => {
   const baseStyles =
     "px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-yellow-400";
@@ -27,11 +31,13 @@ export const Input: React.FC<InputProps> = ({
   return (
     <input
       type={type}
+      name={name}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
       className={`${baseStyles} ${disabledStyles} ${className}`}
       disabled={disabled}
+      readOnly={readOnly}
     />
   );
 };
