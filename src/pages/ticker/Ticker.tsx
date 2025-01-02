@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import SearchBar from "../common/searchBar/SearchBar";
 import { Box } from "@/components/box/Box";
 import { CommentForm } from "./components/commentForm/CommentForm";
 import { CommentList } from "./components/commentList/CommentList";
 import { Comment, CommentData } from "./types";
+import Chart from "./components/chart/Chart";
+import { CHART_TYPES } from "@/constants";
 
 export default function Ticker() {
   const { ticker } = useParams<{ ticker: string }>();
+  const [chartType, setChartType] = useState<string>(CHART_TYPES.DAILY);
+
+  if (!ticker) {
+    return <p>티커 정보가 없습니다. URL을 확인해주세요.</p>;
+  }
 
   const comments = [
     {
@@ -50,6 +58,7 @@ export default function Ticker() {
     console.log("댓글 데이터:", commentData);
     // 댓글 저장 로직 추가 가능
   };
+
   const handleReplySubmit = (replyData: Comment) => {
     console.log(`대댓글 데이터:`, replyData);
     // 대댓글 저장 로직 추가
@@ -67,8 +76,25 @@ export default function Ticker() {
         {/* Chart Section */}
         <Box title="차트">
           <div className="p-4">
-            <div className="w-full h-[300px] bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <p className="text-gray-600 dark:text-gray-300">차트 표시 영역</p>
+            {/* Chart Type Buttons */}
+            <div className="flex gap-2 mb-4">
+              {Object.values(CHART_TYPES).map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setChartType(type)}
+                  className={`px-4 py-2 rounded-md font-semibold ${
+                    chartType === type
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+
+            <div className="w-full h-[400px] bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+              <Chart ticker={ticker} chartType={chartType} />
             </div>
           </div>
         </Box>

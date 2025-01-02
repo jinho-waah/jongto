@@ -22,4 +22,13 @@ export const TABLE_QUERY_KEY: Record<string, string> = {
   LOSS_RATE_RANK: "lossRateRank",
   VOLUME_RANK: "volumeRank",
   MARKET_CAP_RANK: "marketCapRank",
+  CANDLE_DATA: "candleData",
+} as const;
+
+export const CHART_TYPES = {
+  MINUTE: "MINUTE",
+  HOURLY: "HOURLY",
+  DAILY: "DAILY",
+  WEEKLY: "WEEKLY",
+  MONTHLY: "MONTHLY",
 } as const;

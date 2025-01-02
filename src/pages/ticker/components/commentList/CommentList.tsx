@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CommentForm } from "../commentForm/CommentForm";
-import { Comment } from "../../types"; // Comment 타입 import
+import { Comment } from "../../types";
 
 interface CommentListProps {
   comments: Comment[];
@@ -38,13 +38,17 @@ export const CommentList = ({
             {comment.date}
           </p>
 
-          {/* 더보기 버튼 */}
-          {comment.replies && comment.replies.length > 0 && (
+          {/* 대댓글 보기 버튼 */}
+          {depth === 0 && (
             <button
               onClick={() => toggleReplies(index)}
               className="text-sm text-blue-500 dark:text-yellow-400 hover:underline mt-2"
             >
-              {expandedComments.includes(index)
+              {comment.replies && comment.replies.length > 0
+                ? expandedComments.includes(index)
+                  ? `대댓글(${comment.replies.length}) 숨기기`
+                  : `대댓글(${comment.replies.length}) 보기`
+                : expandedComments.includes(index)
                 ? "대댓글 숨기기"
                 : "대댓글 보기"}
             </button>
@@ -56,7 +60,7 @@ export const CommentList = ({
               <CommentList
                 comments={comment.replies || []}
                 depth={depth + 1}
-                onReplySubmit={onReplySubmit} // 부모에서 전달된 onReplySubmit 전달
+                onReplySubmit={onReplySubmit}
               />
               {/* 대댓글 작성 폼 */}
               <CommentForm

@@ -3,7 +3,7 @@ export interface CommentData {
   username: string;
   password: string;
   comment: string;
-  date: string;
+  // date: string;
 }
 
 export interface CommentFormProps {
