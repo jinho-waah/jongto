@@ -7,6 +7,7 @@ interface ChartData {
   close: number;
   high: number;
   low: number;
+  totalVolume: number; // 거래량 추가
 }
 
 interface RawData {
@@ -42,5 +43,6 @@ export const getCandleData = async (
     close: parseFloat(item.closePrice),
     high: parseFloat(item.highPrice),
     low: parseFloat(item.lowPrice),
+    totalVolume: parseInt(item.totalVolume, 10), // 거래량을 숫자로 변환
   }));
 };

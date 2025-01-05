@@ -4,7 +4,7 @@ import { Button } from "@/components/button/Button";
 import { CommentData, CommentFormProps } from "../../types";
 
 const TestName = "사용자123";
-const TestAnnony = "익명123";
+const TestAnnony = "익명";
 
 export const CommentForm = ({ onSubmit }: CommentFormProps) => {
   const [username, setUsername] = useState(TestName);

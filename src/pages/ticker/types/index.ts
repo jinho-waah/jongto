@@ -3,7 +3,6 @@ export interface CommentData {
   username: string;
   password: string;
   comment: string;
-  // date: string;
 }
 
 export interface CommentFormProps {
@@ -11,8 +10,28 @@ export interface CommentFormProps {
 }
 
 export interface Comment {
-  username: string;
-  comment: string;
-  date: string;
-  replies?: Comment[];
+  commentId: number;
+  stockCode: string;
+  author: string;
+  content: string;
+  childCommentCount: number;
+  likeCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Reply {
+  commentId: number;
+  stockCode: string;
+  author: string;
+  content: string;
+  likeCount: number;
+  isParent: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CommentListProps {
+  comments: Comment[];
+  onReplySubmit?: (replyData: Comment, parentId: number) => void;
 }

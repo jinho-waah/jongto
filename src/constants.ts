@@ -23,6 +23,8 @@ export const TABLE_QUERY_KEY: Record<string, string> = {
   VOLUME_RANK: "volumeRank",
   MARKET_CAP_RANK: "marketCapRank",
   CANDLE_DATA: "candleData",
+  COMMENTS: "comments",
+  REPLIES: "replies",
 } as const;
 
 export const CHART_TYPES = {

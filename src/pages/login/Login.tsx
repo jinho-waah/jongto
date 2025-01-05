@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/button/Button";
 
 export default function Login() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
 
   const toggleAuthMode = () => {
     setIsSignUp((prev) => !prev);
@@ -48,6 +48,37 @@ export default function Login() {
             />
             <Button type="submit">로그인</Button>
           </form>
+        </div>
+        <div className="flex flex-col items-center mt-4">
+          <p className="text-gray-500 dark:text-gray-400 mb-2">
+            또는 소셜 계정으로 로그인하세요
+          </p>
+          <div className="flex gap-4">
+            <Button
+              onClick={() =>
+                (window.location.href = "http://localhost:5173/oauth/google")
+              }
+              variant="secondary"
+            >
+              Google
+            </Button>
+            <Button
+              onClick={() =>
+                (window.location.href = "http://localhost:5173/oauth/kakao")
+              }
+              variant="secondary"
+            >
+              Kakao
+            </Button>
+            <Button
+              onClick={() =>
+                (window.location.href = "http://localhost:5173/oauth/naver")
+              }
+              variant="secondary"
+            >
+              Naver
+            </Button>
+          </div>
         </div>
 
         {/* Signup Form */}
