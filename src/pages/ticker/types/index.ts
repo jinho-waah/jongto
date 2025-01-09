@@ -19,6 +19,7 @@ export interface CommentFormProps {
 }
 
 export interface Comment {
+  anonymous: boolean;
   commentId: number;
   stockCode: string;
   author: string;

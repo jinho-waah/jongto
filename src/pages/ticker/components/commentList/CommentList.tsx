@@ -19,9 +19,7 @@ export const CommentList = ({ comments, onReplySubmit }: CommentListProps) => {
       {(Array.isArray(comments) ? comments : []).map((comment) => (
         <li
           key={comment.commentId}
-          className={`pb-2 ${
-            comment.childCommentCount > 0 ? "border-b dark:border-gray-700" : ""
-          }`}
+          className={"pb-2 border-b dark:border-gray-700"}
         >
           {/* 댓글 내용 */}
           <p className="font-semibold">{comment.author}</p>
@@ -44,7 +42,6 @@ export const CommentList = ({ comments, onReplySubmit }: CommentListProps) => {
           {expandedComments.includes(comment.commentId) && (
             <div className="mt-4 ml-6 border-l-2 border-gray-300 dark:border-gray-600 pl-4">
               <ReplyList parentId={comment.commentId} />
-
               <CommentForm
                 onSubmit={(replyData) => {
                   if (onReplySubmit) {

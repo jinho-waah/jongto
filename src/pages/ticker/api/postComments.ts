@@ -5,6 +5,7 @@ import { URL } from "@/constants";
 export const postComments = async (
   payload: PostCommentPayload
 ): Promise<void> => {
+  console.log("payload", payload);
   try {
     const response = await axios.post(`${URL}/comments`, payload, {
       headers: {

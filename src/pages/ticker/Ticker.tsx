@@ -19,8 +19,6 @@ export default function Ticker() {
   const { mutate: postComment, isPending } = usePostComment();
 
   const handleCommentSubmit = (commentData: CommentData) => {
-    console.log("댓글 데이터:", commentData);
-
     const payload: PostCommentPayload = {
       stockCode: safeTicker,
       content: commentData.content,
@@ -34,12 +32,10 @@ export default function Ticker() {
   };
 
   const handleReplySubmit = (replyData: Comment, parentId: number) => {
-    console.log("대댓글 데이터:", replyData, "부모 ID:", parentId);
-
     const payload: PostCommentPayload = {
       stockCode: safeTicker,
       content: replyData.content,
-      password: replyData.password,
+      password: replyData.anonymous ? replyData.password : undefined,
       parentId,
     };
     console.log("payload", payload);
