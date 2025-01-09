@@ -2,7 +2,7 @@ export interface CommentData {
   anonymous: boolean;
   username: string;
   password: string;
-  comment: string;
+  content: string;
   parentId?: string;
 }
 

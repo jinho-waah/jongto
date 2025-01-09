@@ -22,9 +22,9 @@ export const CommentForm = ({ onSubmit, parentId }: CommentFormProps) => {
       anonymous: formData.get("anonymous") === "on",
       username: formData.get("username")?.toString() || "",
       password: formData.get("password")?.toString() || "",
-      comment: formData.get("comment")?.toString() || "",
+      content: formData.get("content")?.toString() || "",
     };
-
+    console.log(commentData);
     if (parentId) {
       onSubmit({ ...commentData, parentId });
     } else {
@@ -58,7 +58,7 @@ export const CommentForm = ({ onSubmit, parentId }: CommentFormProps) => {
       />
       <Input
         type="text"
-        name="comment"
+        name="content"
         placeholder="댓글 입력..."
         className="flex-1"
       />

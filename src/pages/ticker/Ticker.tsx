@@ -23,7 +23,7 @@ export default function Ticker() {
 
     const payload: PostCommentPayload = {
       stockCode: safeTicker,
-      content: commentData.comment,
+      content: commentData.content,
       password: commentData.anonymous ? commentData.password : undefined,
     };
 
