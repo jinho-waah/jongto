@@ -3,9 +3,18 @@ export interface CommentData {
   username: string;
   password: string;
   comment: string;
+  parentId?: string;
+}
+
+export interface PostCommentPayload {
+  stockCode: string;
+  content: string;
+  password?: string;
+  parentId?: number | null;
 }
 
 export interface CommentFormProps {
+  parentId?: string;
   onSubmit: (commentData: CommentData) => void;
 }
 
@@ -18,6 +27,7 @@ export interface Comment {
   likeCount: number;
   createdAt: string;
   updatedAt: string;
+  password?: string;
 }
 
 export interface Reply {

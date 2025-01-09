@@ -1,4 +1,5 @@
-export const URL = "http://3.36.151.122";
+// export const URL = "http://3.36.151.122";
+export const URL = "http://jongtobang.duckdns.org";
 
 export const TAB_NAME = {
   gainTop10: "등락율 상위 Top 10",

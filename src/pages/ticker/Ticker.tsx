@@ -8,22 +8,45 @@ import { useComments } from "./hooks/useComments";
 import Chart from "./components/chart/Chart";
 import { CHART_TYPES } from "@/constants";
 import { Button } from "@/components/button/Button";
-import { Comment, CommentData } from "./types";
+import { Comment, CommentData, PostCommentPayload } from "./types";
+import { usePostComment } from "./hooks/usePostComments";
 
 export default function Ticker() {
   const { ticker } = useParams<{ ticker: string }>();
   const safeTicker = ticker as string;
   const [chartType, setChartType] = useState<string>(CHART_TYPES.DAILY);
   const { data: comments, isLoading, isError } = useComments(safeTicker);
+  const { mutate: postComment, isPending } = usePostComment();
 
   const handleCommentSubmit = (commentData: CommentData) => {
     console.log("댓글 데이터:", commentData);
-    // 댓글 전송 로직 추가
+
+    const payload: PostCommentPayload = {
+      stockCode: safeTicker,
+      content: commentData.comment,
+      password: commentData.anonymous ? commentData.password : undefined,
+    };
+
+    postComment(payload);
+    if (isPending) {
+      console.log("댓글 등록 중!");
+    }
   };
 
   const handleReplySubmit = (replyData: Comment, parentId: number) => {
     console.log("대댓글 데이터:", replyData, "부모 ID:", parentId);
-    // 대댓글 전송 로직 추가
+
+    const payload: PostCommentPayload = {
+      stockCode: safeTicker,
+      content: replyData.content,
+      password: replyData.password,
+      parentId,
+    };
+    console.log("payload", payload);
+    postComment(payload);
+    if (isPending) {
+      console.log("댓글 등록 중!");
+    }
   };
 
   return (

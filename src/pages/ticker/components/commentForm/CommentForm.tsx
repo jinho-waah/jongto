@@ -6,7 +6,7 @@ import { CommentData, CommentFormProps } from "../../types";
 const TestName = "사용자123";
 const TestAnnony = "익명";
 
-export const CommentForm = ({ onSubmit }: CommentFormProps) => {
+export const CommentForm = ({ onSubmit, parentId }: CommentFormProps) => {
   const [username, setUsername] = useState(TestName);
 
   const handleAnonymousChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +24,12 @@ export const CommentForm = ({ onSubmit }: CommentFormProps) => {
       password: formData.get("password")?.toString() || "",
       comment: formData.get("comment")?.toString() || "",
     };
-    console.log(commentData);
-    onSubmit(commentData);
+
+    if (parentId) {
+      onSubmit({ ...commentData, parentId });
+    } else {
+      onSubmit(commentData);
+    }
   };
 
   return (
