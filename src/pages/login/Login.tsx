@@ -1,5 +1,4 @@
 export default function Login() {
-  console.log(import.meta.env.VITE_NAVER_CLIENT_ID);
   const handleSocialLogin = (provider: "naver" | "kakao" | "google") => {
     let authUrl = "";
 
@@ -12,7 +11,7 @@ export default function Login() {
         }&state=random_state`;
         break;
       case "kakao":
-        authUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+        authUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${
           import.meta.env.VITE_KAKAO_CLIENT_ID
         }&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
         break;
@@ -29,6 +28,7 @@ export default function Login() {
 
     window.location.href = authUrl;
   };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">

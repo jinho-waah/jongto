@@ -5,6 +5,7 @@ import pageRoutes from "./apiRoutes";
 import DarkMode from "./components/darkmode/DarkMode";
 import Layout from "./pages/common/layout/Layout";
 import Login from "./pages/login/Login";
+import AuthCallbackPage from "./pages/login/AuthCallbackPage";
 
 const CommonLayout = () => (
   <Layout>
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: pageRoutes.ticker,
         element: <Ticker />,
+      },
+      {
+        path: pageRoutes.auth,
+        element: <AuthCallbackPage />,
       },
     ],
   },
