@@ -24,7 +24,6 @@ export const CommentForm = ({ onSubmit, parentId }: CommentFormProps) => {
       password: formData.get("password")?.toString() || "",
       content: formData.get("content")?.toString() || "",
     };
-    console.log(commentData);
     if (parentId) {
       onSubmit({ ...commentData, parentId });
     } else {

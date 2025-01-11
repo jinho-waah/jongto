@@ -2,14 +2,11 @@ import axios from "axios";
 import { PostCommentPayload } from "../types";
 import { URL } from "@/constants";
 
-export const postComments = async (
-  payload: PostCommentPayload
-): Promise<void> => {
-  console.log("payload", payload);
+export const postComments = async (payload: PostCommentPayload): Promise<void> => {
   try {
     const response = await axios.post(`${URL}/comments`, payload, {
       headers: {
-        "Content-Type": "application/json", // JSON 형식 명시
+        "Content-Type": "application/json",
       },
     });
     console.log("댓글 작성 성공:", response.data);

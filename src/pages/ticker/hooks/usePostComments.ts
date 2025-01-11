@@ -8,8 +8,7 @@ export const usePostComment = () => {
 
   return useMutation({
     mutationFn: (payload: PostCommentPayload) => postComments(payload),
-    onSuccess: (data) => {
-      console.log("댓글 작성 성공:", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [TABLE_QUERY_KEY.COMMENTS],
       });

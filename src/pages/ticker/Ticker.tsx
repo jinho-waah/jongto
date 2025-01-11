@@ -27,7 +27,7 @@ export default function Ticker() {
 
     postComment(payload);
     if (isPending) {
-      console.log("댓글 등록 중!");
+      return;
     }
   };
 
@@ -38,10 +38,9 @@ export default function Ticker() {
       password: replyData.anonymous ? replyData.password : undefined,
       parentId,
     };
-    console.log("payload", payload);
     postComment(payload);
     if (isPending) {
-      console.log("댓글 등록 중!");
+      return;
     }
   };
 
